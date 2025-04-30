@@ -39,27 +39,29 @@
 
   <aside class="controls" role="region" aria-labelledby="filtros-title">
     <h2 id="filtros-title">Filtros</h2>
+
     <fieldset>
       <legend>Rangos de edad</legend>
-      <label><input type="checkbox" value="18-25" checked> 18–25</label>
-      <label><input type="checkbox" value="26-35" checked> 26–35</label>
-      <label><input type="checkbox" value="36-45" checked> 36–45</label>
-      <label><input type="checkbox" value="46+"   checked> 46+</label>
+      <label title="Muestra datos de 18–25"><input type="checkbox" value="18-25" checked> 18–25</label>
+      <label title="Muestra datos de 26–35"><input type="checkbox" value="26-35" checked> 26–35</label>
+      <label title="Muestra datos de 36–45"><input type="checkbox" value="36-45" checked> 36–45</label>
+      <label title="Muestra datos de 46+"><input type="checkbox" value="46+"   checked> 46+</label>
     </fieldset>
+
     <fieldset>
       <legend>Opciones adicionales</legend>
-      <label><input type="checkbox" id="toggle-nulos" checked> Incluir nulos</label>
+      <label title="Incluye respuestas sin edad"><input type="checkbox" id="toggle-nulos" checked> Incluir nulos</label>
     </fieldset>
   </aside>
 
   <main class="charts">
     <section class="chart-section" aria-label="Gráfico de popularidad total por color">
       <h2>Popularidad Total por Color</h2>
-      <canvas id="chart-total" role="img" aria-label="Gráfico de barras de popularidad total"></canvas>
+      <canvas id="chart-total" role="img" aria-label="Gráfico de doughnut de popularidad total"></canvas>
     </section>
     <section class="chart-section" aria-label="Gráfico de distribución por edad">
       <h2>Distribución por Edad</h2>
-      <canvas id="chart-edad" role="img" aria-label="Gráfico apilado por rangos de edad"></canvas>
+      <canvas id="chart-edad" role="img" aria-label="Gráfico de barras horizontales apiladas por rangos de edad"></canvas>
     </section>
   </main>
 
