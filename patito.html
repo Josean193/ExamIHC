@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>La tortuga y la liebre</title>
+  <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Freckle+Face&family=Comic+Neue:wght@300;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-primary: #ff9a8b;
+      --color-secondary: #ffd3b5;
+      --color-accent: #6b5b95;
+      --color-light: #fff8f0;
+      --color-dark: #333;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Comic Neue', cursive;
+      background: var(--color-light);
+      color: var(--color-dark);
+      line-height: 1.6;
+      padding: 2rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    header h1 {
+      font-family: 'Freckle Face', cursive;
+      font-size: 3rem;
+      color: var(--color-accent);
+    }
+
+    .cuento {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border: 3px dashed var(--color-accent);
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .cuento h2 {
+      font-family: 'Freckle Face', cursive;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--color-primary);
+    }
+
+    .cuento p {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .controls {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-volver, .btn-narrar {
+      display: inline-block;
+      padding: 0.5rem 1.5rem;
+      background: var(--color-primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background 0.3s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-volver:hover,
+    .btn-narrar:hover {
+      background: var(--color-accent);
+    }
+
+    .highlight {
+      background-color: var(--color-secondary);
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 1rem;
+      background: var(--color-accent);
+      color: white;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>MiBiblioteca</h1>
+  </header>
+
+  <section class="cuento">
+    <h2>El patito feo</h2>
+
+    <div class="controls">
+      <button class="btn-narrar" onclick="narrarCuento()">🔊 Escuchar</button>
+      <button class="btn-narrar" onclick="pausarCuento()">⏸️ Pausar</button>
+      <button class="btn-narrar" onclick="reanudarCuento()">▶️ Reanudar</button>
+      <button class="btn-narrar" onclick="detenerCuento()">⏹️ Detener</button>
+      <a href="index.html" class="btn-volver">← Volver a cuentos</a>
+    </div>
+
+    <p id="texto-cuento">
+        En la granja había un gran alboroto: los polluelos de Mamá Pata estaban rompiendo el cascarón.
+
+        Uno a uno, comenzaron a salir. Mamá Pata estaba tan emocionada con sus adorables patitos que no notó que uno de sus huevos, el más grande de todos, permanecía intacto.
+        
+        A las pocas horas, el último huevo comenzó a romperse. Mamá Pata, todos los polluelos y los animales de la granja, se encontraban a la expectativa de conocer al pequeño que tardaba en nacer. De repente, del cascarón salió un patito muy alegre. Cuando todos lo vieron se quedaron sorprendidos, este patito no era pequeño ni amarillo y tampoco estaba cubierto de suaves plumas. Este patito era grande, gris y en vez del esperado graznido, cada vez que hablaba sonaba como una corneta vieja.
+        
+        Aunque nadie dijo nada, todos pensaron lo mismo: “Este patito es demasiado feo”.
+        
+        Pasaron los días y todos los animales de la granja se burlaban de él. El patito feo se sintió muy triste y una noche escapó de la granja para buscar un nuevo hogar.
+        
+        El patito feo recorrió la profundidad del bosque y cuando estaba a punto de darse por vencido, encontró el hogar de una humilde anciana que vivía con una gata y una gallina. El patito se quedó con ellos durante un tiempo, pero como no estaba contento, pronto se fue.
+        
+        Al llegar el invierno, el pobre patito feo casi se congela. Afortunadamente, un campesino lo llevó a su casa a vivir con su esposa e hijos. Pero el patito estaba aterrado de los niños, quienes gritaban y brincaban todo el tiempo y nuevamente escapó, pasando el invierno en un estanque pantanoso.
+        
+        Finalmente, llegó la primavera. El patito feo vio a una familia de cisnes nadando en el estanque y quiso acercárseles. Pero recordó cómo todos se burlaban de él y agachó la cabeza avergonzado. Cuando miró su reflejo en el agua se quedó asombrado. Él no era un patito feo, sino un apuesto y joven cisne. Ahora sabía por qué se veía tan diferente a sus hermanos y hermanas. ¡Ellos eran patitos, pero él era un cisne! Feliz, nadó hacia su familia.
+    </p>
+  </section>
+
+  <footer>
+    <p>© 2025 MiBiblioteca. ¡Sigue disfrutando de los cuentos!</p>
+  </footer>
+
+  <script>
+    let utterance;
+    let textoOriginal;
+    let palabras;
+
+    function narrarCuento() {
+      detenerCuento(); // Reinicia si ya hay algo en reproducción
+
+      const contenedor = document.getElementById("texto-cuento");
+      textoOriginal = contenedor.innerText;
+      palabras = textoOriginal.split(/\s+/);
+
+      // Envuelve cada palabra en un span
+      contenedor.innerHTML = palabras.map((palabra, i) =>
+        `<span id="palabra-${i}">${palabra}</span>`
+      ).join(" ");
+
+      utterance = new SpeechSynthesisUtterance(textoOriginal);
+      utterance.lang = 'es-ES';
+      utterance.rate = 1;
+
+      utterance.onboundary = (event) => {
+        if (event.name === "word" && typeof event.charIndex !== "undefined") {
+          const index = getWordIndex(textoOriginal, event.charIndex);
+          const spans = document.querySelectorAll('#texto-cuento span');
+          spans.forEach(span => span.classList.remove('highlight'));
+          const actual = document.getElementById(`palabra-${index}`);
+          if (actual) actual.classList.add('highlight');
+        }
+      };
+
+      utterance.onend = () => {
+        // Limpiar resaltado
+        const spans = document.querySelectorAll('#texto-cuento span');
+        spans.forEach(span => span.classList.remove('highlight'));
+      };
+
+      speechSynthesis.speak(utterance);
+    }
+
+    function pausarCuento() {
+      if (speechSynthesis.speaking && !speechSynthesis.paused) {
+        speechSynthesis.pause();
+      }
+    }
+
+    function reanudarCuento() {
+      if (speechSynthesis.paused) {
+        speechSynthesis.resume();
+      }
+    }
+
+    function detenerCuento() {
+      if (speechSynthesis.speaking || speechSynthesis.paused) {
+        speechSynthesis.cancel();
+      }
+      // Limpiar resaltado
+      const spans = document.querySelectorAll('#texto-cuento span');
+      spans.forEach(span => span.classList.remove('highlight'));
+    }
+
+    function getWordIndex(text, charIndex) {
+      const before = text.slice(0, charIndex);
+      return before.trim().split(/\s+/).length - 1;
+    }
+  </script>
+
+</body>
+</html>

@@ -2,69 +2,88 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Panel de Preferencias de Color</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>MiBiblioteca – Cuentos</title>
+  <!-- Mismas fuentes divertidas -->
+  <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Freckle+Face&family=Comic+Neue:wght@300;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+
   <header>
-    <h1>Encuesta de Colores</h1>
+    <div class="logo">MiBiblioteca</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="index.html">Cuentos</a></li>
+        <li><a href="padres.html">Padres</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <!-- Indicador de carga -->
-  <div id="loader" role="status" aria-live="polite">
-    <span class="spinner"></span> Cargando datos…
-  </div>
-
-  <!-- Panel de estadísticas -->
-  <section class="summary-cards" aria-label="Resumen de estadísticas">
-    <div class="card" id="total-responses">
-      <h2>Total de respuestas</h2>
-      <p class="value">-</p>
-    </div>
-    <div class="card" id="valid-responses">
-      <h2>Con edad válida</h2>
-      <p class="value">-</p>
-    </div>
-    <div class="card" id="null-responses">
-      <h2>Sin edad (nulos)</h2>
-      <p class="value">-</p>
-    </div>
-    <div class="card" id="top-color">
-      <h2>Color más popular</h2>
-      <p class="value">-</p>
-    </div>
+  <section class="hero">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <h1>Mis Cuentos</h1>
   </section>
 
-  <aside class="controls" role="region" aria-labelledby="filtros-title">
-    <h2 id="filtros-title">Filtros</h2>
+  <main>
+    <section id="filtros" class="filtros-fun">
+      <h2>Filtrar por:</h2>
+      <button data-tipo="tradicional">Tradicionales</button>
+      <button data-tipo="ia">Generados IA</button>
+      <button data-tipo="todos">Todos</button>
 
-    <fieldset>
-      <legend>Rangos de edad</legend>
-      <label title="Muestra datos de 18–25"><input type="checkbox" value="18-25" checked> 18–25</label>
-      <label title="Muestra datos de 26–35"><input type="checkbox" value="26-35" checked> 26–35</label>
-      <label title="Muestra datos de 36–45"><input type="checkbox" value="36-45" checked> 36–45</label>
-      <label title="Muestra datos de 46+"><input type="checkbox" value="46+"   checked> 46+</label>
-    </fieldset>
+      <div class="busqueda">
+        <h3>Buscar por palabra clave:</h3>
+        <input type="text" id="input-busqueda" placeholder="Escribe una palabra...">
+      </div>
 
-    <fieldset>
-      <legend>Opciones adicionales</legend>
-      <label title="Incluye respuestas sin edad"><input type="checkbox" id="toggle-nulos" checked> Incluir nulos</label>
-    </fieldset>
-  </aside>
-
-  <main class="charts">
-    <section class="chart-section" aria-label="Gráfico de popularidad total por color">
-      <h2>Popularidad Total por Color</h2>
-      <canvas id="chart-total" role="img" aria-label="Gráfico de doughnut de popularidad total"></canvas>
+      <div class="categorias">
+        <h3>Categorías:</h3>
+        <select id="select-categoria">
+          <option value="todas">Todas</option>
+          <option value="aventura">Aventura</option>
+          <option value="fantasía">Fantasía</option>
+          <option value="fábula">Fábula</option>
+          <option value="espacial">Espacial</option>
+        </select>
+      </div>
     </section>
-    <section class="chart-section" aria-label="Gráfico de distribución por edad">
-      <h2>Distribución por Edad</h2>
-      <canvas id="chart-edad" role="img" aria-label="Gráfico de barras horizontales apiladas por rangos de edad"></canvas>
+
+    <section class="stories-grid" id="lista-cuentos">
+      <div class="story-card" data-tipo="tradicional" data-categoria="fábula">
+        <img src="assets/img/liebre.jpg" alt="La tortuga y la liebre">
+        <div class="card-content">
+          <h2>La tortuga y la liebre</h2>
+          <p>Una fábula sobre la constancia...</p>
+          <a class="btn-leer" href="conejo.html">Leer</a>
+        </div>
+      </div>
+      <div class="story-card" data-tipo="ia" data-categoria="espacial">
+        <img src="assets/img/cuento2.jpg" alt="La aventura espacial">
+        <div class="card-content">
+          <h2>La aventura espacial</h2>
+          <p>Un viaje fuera de este mundo...</p>
+          <a class="btn-leer" href="patito.html">Leer</a>
+        </div>
+      </div>
+      <div class="story-card" data-tipo="ia" data-categoria="fantasía">
+        <img src="assets/img/cuento3.jpg" alt="El bosque mágico">
+        <div class="card-content">
+          <h2>El bosque mágico</h2>
+          <p>Descubre criaturas encantadas...</p>
+          <a class="btn-leer" href="bosque.html">Leer</a>
+        </div>
+      </div>
     </section>
   </main>
 
-  <script src="script.js"></script>
+  <footer>
+    <p>© 2025 MiBiblioteca. ¡A leer se ha dicho!</p>
+  </footer>
+
+  <script src="js/cuentos.js"></script>
+
 </body>
 </html>
